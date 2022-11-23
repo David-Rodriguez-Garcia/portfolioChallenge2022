@@ -1,20 +1,43 @@
-import { View, Text } from 'react-native'
-import { Article } from '../../core/domain/model/Feed'
+import { View, Text, FlatList, StyleSheet, StatusBar } from 'react-native'
+import { aSetOfArticles } from '../../core/domain/model/Feed/Feed.model'
 
-const loremText =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a dignissim mauris, eget auctor ante. Nunc et mauris odio. Vestibulum erat turpis, commodo vitae bibendum et, fringilla vel urna. Suspendisse nisi ipsum, congue vel purus nec, vulputate mollis dolor. Donec venenatis mauris at tincidunt pharetra. Morbi pharetra justo lacus, vel condimentum odio dictum ut. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis id turpis molestie, vehicula neque vel, dignissim tellus. Vestibulum sodales ipsum metus, eget porttitor diam faucibus ut. Pellentesque nec pharetra augue. '
+const FakeData = aSetOfArticles(30)
 
-const aSetOfArticles = (num: number): Article[] => {
-  return new Array(num).map((value, index) => ({
-    img: 'https://reactnative.dev/img/tiny_logo.png',
-    title: `title_${index}`,
-    description: loremText,
-    url: `URL_TO_ARTICLE_${index}`,
-  }))
+export const Feed = () => {
+  return (
+    <View style={styles.feedWrapper}>
+      <FlatList
+        data={FakeData}
+        ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+        renderItem={({ item }) => (
+          <View key={item.id} style={styles.articleWrapper}>
+            <View style={styles.image}></View>
+            <View style={{ flex: 1 }}>
+              <Text>{item.title}</Text>
+              <Text numberOfLines={2} ellipsizeMode="tail">
+                {item.description}
+              </Text>
+            </View>
+          </View>
+        )}
+      />
+    </View>
+  )
 }
 
-export const Feed = () => (
-  <View>
-    <Text>This is the Feed!</Text>
-  </View>
-)
+const styles = StyleSheet.create({
+  feedWrapper: {
+    paddingTop: StatusBar.currentHeight,
+  },
+  articleWrapper: {
+    flexDirection: 'row',
+  },
+  image: {
+    height: 50,
+    width: 50,
+    backgroundColor: 'black',
+  },
+  separator: {
+    height: 20,
+  },
+})
