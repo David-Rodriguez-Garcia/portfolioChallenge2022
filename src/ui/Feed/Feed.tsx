@@ -1,36 +1,33 @@
 import { View, Text, FlatList, StyleSheet, StatusBar } from 'react-native'
+
 import { aSetOfArticles } from '../../core/domain/model/Feed/Feed.model'
+import { Row } from '../_objects/Row'
 
 const FakeData = aSetOfArticles(30)
 
-export const Feed = () => {
-  return (
-    <View style={styles.feedWrapper}>
-      <FlatList
-        data={FakeData}
-        ItemSeparatorComponent={() => <View style={styles.separator}></View>}
-        renderItem={({ item }) => (
-          <View key={item.id} style={styles.articleWrapper}>
-            <View style={styles.image}></View>
-            <View style={{ flex: 1 }}>
-              <Text>{item.title}</Text>
-              <Text numberOfLines={2} ellipsizeMode="tail">
-                {item.description}
-              </Text>
-            </View>
+export const Feed = () => (
+  <View style={styles.feedWrapper}>
+    <FlatList
+      data={FakeData}
+      ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+      renderItem={({ item }) => (
+        <Row key={item.id}>
+          <View style={styles.image} />
+          <View style={{ flex: 1 }}>
+            <Text>{item.title}</Text>
+            <Text numberOfLines={2} ellipsizeMode="tail">
+              {item.description}
+            </Text>
           </View>
-        )}
-      />
-    </View>
-  )
-}
+        </Row>
+      )}
+    />
+  </View>
+)
 
 const styles = StyleSheet.create({
   feedWrapper: {
     paddingTop: StatusBar.currentHeight,
-  },
-  articleWrapper: {
-    flexDirection: 'row',
   },
   image: {
     height: 50,
