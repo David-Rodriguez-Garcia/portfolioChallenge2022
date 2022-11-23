@@ -9,12 +9,15 @@ export const Feed = () => (
   <View style={styles.feedWrapper}>
     <FlatList
       data={FakeData}
-      ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (
         <Row key={item.id}>
           <View style={styles.image} />
           <View style={{ flex: 1 }}>
-            <Text>{item.title}</Text>
+            <Row justifyContent="space-between">
+              <Text>{item.title}</Text>
+              <Text>{item.date.toLocaleDateString()}</Text>
+            </Row>
             <Text numberOfLines={2} ellipsizeMode="tail">
               {item.description}
             </Text>

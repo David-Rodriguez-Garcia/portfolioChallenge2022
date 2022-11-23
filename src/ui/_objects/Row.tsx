@@ -1,6 +1,17 @@
 import React from 'react'
 import { View } from 'react-native'
 
-export const Row = ({ children }: { children: React.ReactNode }) => {
-  return <View style={{ flexDirection: 'row' }}>{children}</View>
+type Props = {
+  children: React.ReactNode
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+}
+
+export const Row = ({ children, ...props }: Props) => {
+  return <View style={{ flexDirection: 'row', ...props }}>{children}</View>
 }
