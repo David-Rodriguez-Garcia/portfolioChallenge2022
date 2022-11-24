@@ -4,5 +4,7 @@ import { Feed } from './Feed'
 const FakeData = sortArticles(aSetOfArticles(30))
 
 export const FeedController = () => {
-  return <Feed articles={FakeData} />
+  const getArticle = () => null
+
+  return <Feed articles={FakeData} onArticlePress={getArticle} />
 }
