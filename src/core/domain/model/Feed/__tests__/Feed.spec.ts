@@ -1,5 +1,5 @@
 import { ONE_YEAR_MILLIS } from '../../../utils'
-import { anArticle, sortArticles, aSetOfArticles } from '../Feed.model'
+import { anArticle, aSetOfArticles, sortArticles } from '../Feed.model'
 
 describe('Feed', () => {
   describe('anArticle builder', () => {
