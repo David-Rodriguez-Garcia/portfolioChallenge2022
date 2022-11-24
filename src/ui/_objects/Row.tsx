@@ -1,8 +1,8 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import { View } from 'react-native'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   justifyContent?:
     | 'flex-start'
     | 'flex-end'
