@@ -1,4 +1,4 @@
-import { getArbitraryDate } from '../../utils/Time'
+import { getArbitraryDate, cloneDeep } from '../../utils'
 import { Article } from './Feed'
 
 const lorem =
@@ -15,10 +15,18 @@ export const anArticle = (options?: Partial<Article>): Article => ({
 })
 
 export const aSetOfArticles = (size = 6) => {
-  let set = []
+  const set = []
 
   for (let c = 0; c < size; c++) {
     set.push(anArticle({ id: `id_${c}`, date: getArbitraryDate() }))
   }
   return set
+}
+
+export const sortArticles = (articles: Article[]) => {
+  const articlesClone = cloneDeep(articles)
+
+  return articlesClone.sort(
+    (article_1, article_2) => article_1.date.getTime() - article_2.date.getTime()
+  )
 }

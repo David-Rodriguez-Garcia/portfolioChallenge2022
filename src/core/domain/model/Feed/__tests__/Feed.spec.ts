@@ -1,4 +1,5 @@
-import { anArticle, aSetOfArticles } from '../Feed.model'
+import { ONE_YEAR_MILLIS } from '../../../utils'
+import { anArticle, sortArticles, aSetOfArticles } from '../Feed.model'
 
 describe('Feed', () => {
   describe('anArticle builder', () => {
@@ -70,6 +71,41 @@ describe('Feed', () => {
       const uniqueIDs = [...new Set(IDs)]
 
       expect(IDs).toHaveLength(uniqueIDs.length)
+    })
+  })
+
+  describe('sortArticles', () => {
+    it('returns articles sorted', () => {
+      const sortedArticles = [
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+      ]
+      const unsortedArticles = [
+        sortedArticles[1],
+        sortedArticles[0],
+        sortedArticles[3],
+        sortedArticles[2],
+      ]
+
+      const received = sortArticles(unsortedArticles)
+
+      expect(received).toEqual(sortedArticles)
+    })
+
+    it('does not modify existing array', () => {
+      const unsortedArticles = [
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+      ]
+
+      const unsortedArticlesCopy = [...unsortedArticles]
+
+      sortArticles(unsortedArticles)
+      expect(unsortedArticles).toEqual(unsortedArticlesCopy)
     })
   })
 })

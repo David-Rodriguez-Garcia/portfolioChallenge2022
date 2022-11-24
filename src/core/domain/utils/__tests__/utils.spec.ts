@@ -1,4 +1,4 @@
-import { getArbitraryDate } from '../Time'
+import { getArbitraryDate } from '..'
 
 describe('getArbitraryDate', () => {
   it('returns a Date object', () => {
