@@ -1,6 +1,3 @@
-const ONE_DAY_MILLIS = 24 * 3600 * 1000
-const ONE_YEAR_MILLIS = ONE_DAY_MILLIS * 365
+const ONE_YEAR_MILLIS = 365 * 24 * 3600 * 1000
 
-export const getArbitraryDate = () => {
-  return new Date(Date.now() - Math.random() * ONE_YEAR_MILLIS)
-}
+export const getArbitraryDate = () => new Date(Date.now() - ONE_YEAR_MILLIS * Math.random())
