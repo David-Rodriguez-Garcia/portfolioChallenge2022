@@ -1,14 +1,14 @@
 import { View, Text, FlatList, StyleSheet, StatusBar } from 'react-native'
 
-import { aSetOfArticles } from '../../core/domain/model/Feed/Feed.model'
+import { Article } from '../../core/domain/model/Feed/Feed'
 import { Row } from '../_objects/Row'
 
-const FakeData = aSetOfArticles(30)
+type Props = { articles: Article[] }
 
-export const Feed = () => (
+export const Feed = ({ articles }: Props) => (
   <View style={styles.feedWrapper}>
     <FlatList
-      data={FakeData}
+      data={articles}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (
         <Row key={item.id}>
