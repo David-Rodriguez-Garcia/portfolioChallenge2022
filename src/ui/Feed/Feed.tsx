@@ -1,9 +1,10 @@
 import { View, Text, FlatList, StyleSheet, StatusBar } from 'react-native'
 
 import { Article } from '../../core/domain/model/Feed/Feed'
-import { Row } from '../_objects/Row'
 import { SmallArticleImage } from './_components/Image'
 import { Separator } from './_components/Separator'
+import { Box } from './_objects/Box'
+import { Row } from './_objects/Row'
 
 type Props = { articles: Article[] }
 
@@ -15,7 +16,7 @@ export const Feed = ({ articles }: Props) => (
       renderItem={({ item }) => (
         <Row key={item.id}>
           <SmallArticleImage />
-          <View style={{ flex: 1 }}>
+          <Box>
             <Row justifyContent="space-between">
               <Text>{item.title}</Text>
               <Text>{item.date.toLocaleDateString()}</Text>
@@ -23,7 +24,7 @@ export const Feed = ({ articles }: Props) => (
             <Text numberOfLines={2} ellipsizeMode="tail">
               {item.description}
             </Text>
-          </View>
+          </Box>
         </Row>
       )}
     />
