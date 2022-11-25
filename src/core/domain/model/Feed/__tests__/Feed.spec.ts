@@ -1,10 +1,10 @@
 import { ONE_YEAR_MILLIS } from '../../../utils'
-import { aUniqueArticle, aSetOfArticles, sortArticles } from '../Feed.model'
+import { anArticle, aSetOfArticles, sortArticles } from '../Feed.model'
 
 describe('Feed', () => {
-  describe('aUniqueArticle builder', () => {
+  describe('anArticle builder', () => {
     it('returns an article', () => {
-      const received = aUniqueArticle()
+      const received = anArticle()
       const requiredProps = ['id', 'date', 'img', 'title', 'description', 'url']
 
       requiredProps.forEach((prop) => {
@@ -14,15 +14,15 @@ describe('Feed', () => {
     })
 
     it('returns an article with unique ID', () => {
-      const received1 = aUniqueArticle()
-      const received2 = aUniqueArticle()
+      const received1 = anArticle()
+      const received2 = anArticle()
 
       expect(received1.id).not.toEqual(received2.id)
     })
 
     it('returns an article with arbitrary date', () => {
-      const received1 = aUniqueArticle()
-      const received2 = aUniqueArticle()
+      const received1 = anArticle()
+      const received2 = anArticle()
 
       expect(received1.date.getTime()).not.toEqual(received2.date.getTime())
     })
@@ -36,7 +36,7 @@ describe('Feed', () => {
         description: 'Lorem ipsum Donor',
         url: 'https://google.com',
       }
-      const received = aUniqueArticle(customArticle)
+      const received = anArticle(customArticle)
 
       expect(received).toEqual(customArticle)
     })
@@ -63,10 +63,10 @@ describe('Feed', () => {
   describe('sortArticles', () => {
     it('returns articles sorted', () => {
       const sortedArticles = [
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
       ]
       const unsortedArticles = [
         sortedArticles[1],
@@ -82,10 +82,10 @@ describe('Feed', () => {
 
     it('does not modify existing array', () => {
       const unsortedArticles = [
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
-        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
       ]
 
       const unsortedArticlesCopy = [...unsortedArticles]
