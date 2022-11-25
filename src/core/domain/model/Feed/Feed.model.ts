@@ -7,7 +7,7 @@ const lorem =
 const articleTemplate: Article = {
   id: 'id_1',
   date: new Date(),
-  img: 'https://reactnative.dev/img/tiny_logo.png',
+  img: 'path/to/image',
   title: 'Fake article title',
   description: lorem,
   url: 'https://www.fakeUrl.com/fakeArticle',
