@@ -15,8 +15,9 @@ export const Feed = ({ articles, onArticlePress }: Props) => (
         <ArticleEntry
           key={item.id}
           title={item.title}
-          date={item.date}
           description={item.description}
+          image={item.img}
+          date={item.date}
           onPress={onArticlePress}
         />
       )}

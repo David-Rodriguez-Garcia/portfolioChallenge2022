@@ -1,13 +1,15 @@
-import { View } from 'react-native'
+import { Image } from 'react-native'
 
-export const SmallArticleImage = () => {
+type Props = { image: string }
+
+export const SmallArticleImage = ({ image }: Props) => {
   return (
-    <View
+    <Image
       testID="smallArticleImage"
+      source={{ uri: image }}
       style={{
         height: 50,
         width: 50,
-        backgroundColor: 'black',
       }}
     />
   )

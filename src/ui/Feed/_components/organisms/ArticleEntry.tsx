@@ -8,15 +8,16 @@ import { ArticleHeader } from '../molecules/ArticleHeader'
 
 type Props = {
   title: string
-  date: Date
   description: string
+  image: string
+  date: Date
   onPress: () => void
 }
 
-export const ArticleEntry = ({ title, date, description, onPress }: Props) => (
+export const ArticleEntry = ({ title, description, image, date, onPress }: Props) => (
   <TouchableHighlight onPress={onPress}>
     <Row>
-      <SmallArticleImage />
+      <SmallArticleImage image={image} />
       <Box>
         <ArticleHeader title={title} date={date} />
         <SmallDescription>{description}</SmallDescription>
