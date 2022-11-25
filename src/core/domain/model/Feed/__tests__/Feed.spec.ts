@@ -1,16 +1,30 @@
 import { ONE_YEAR_MILLIS } from '../../../utils'
-import { anArticle, aSetOfArticles, sortArticles } from '../Feed.model'
+import { aUniqueArticle, aSetOfArticles, sortArticles } from '../Feed.model'
 
 describe('Feed', () => {
-  describe('anArticle builder', () => {
+  describe('aUniqueArticle builder', () => {
     it('returns an article', () => {
-      const received = anArticle()
+      const received = aUniqueArticle()
       const requiredProps = ['id', 'date', 'img', 'title', 'description', 'url']
 
       requiredProps.forEach((prop) => {
         expect(received).toHaveProperty(prop)
       })
       expect(Object.keys(received)).toHaveLength(requiredProps.length)
+    })
+
+    it('returns an article with unique ID', () => {
+      const received1 = aUniqueArticle()
+      const received2 = aUniqueArticle()
+
+      expect(received1.id).not.toEqual(received2.id)
+    })
+
+    it('returns an article with arbitrary date', () => {
+      const received1 = aUniqueArticle()
+      const received2 = aUniqueArticle()
+
+      expect(received1.date.getTime()).not.toEqual(received2.date.getTime())
     })
 
     it('returns an article with custom properties', () => {
@@ -22,14 +36,14 @@ describe('Feed', () => {
         description: 'Lorem ipsum Donor',
         url: 'https://google.com',
       }
-      const received = anArticle(customArticle)
+      const received = aUniqueArticle(customArticle)
 
       expect(received).toEqual(customArticle)
     })
   })
 
   describe('aSetOfArticles builder', () => {
-    it('returned element is an article', () => {
+    it('returns elements of type article', () => {
       const received = aSetOfArticles()
       const requiredProps = ['id', 'date', 'img', 'title', 'description', 'url']
 
@@ -38,49 +52,21 @@ describe('Feed', () => {
       })
     })
 
-    it('returns articles with unique IDs', () => {
-      const received = aSetOfArticles()
-
-      const IDs = received.map((article) => article.id)
-      const uniqueIDs = [...new Set(IDs)]
-
-      expect(IDs).toHaveLength(uniqueIDs.length)
-    })
-
-    it('returns articles with unique dates', () => {
-      const received = aSetOfArticles()
-
-      const dates = received.map((article) => article.date.toLocaleString())
-      const uniqueDates = [...new Set(dates)]
-
-      expect(dates).toHaveLength(uniqueDates.length)
-    })
-
     it('returns expected number of articles', () => {
       const expectedSize = 13
       const received = aSetOfArticles(expectedSize)
 
       expect(received).toHaveLength(expectedSize)
     })
-
-    it('returns expected number of articles with unique IDs', () => {
-      const expectedSize = 17
-      const received = aSetOfArticles(expectedSize)
-
-      const IDs = received.map((article) => article.id)
-      const uniqueIDs = [...new Set(IDs)]
-
-      expect(IDs).toHaveLength(uniqueIDs.length)
-    })
   })
 
   describe('sortArticles', () => {
     it('returns articles sorted', () => {
       const sortedArticles = [
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
       ]
       const unsortedArticles = [
         sortedArticles[1],
@@ -96,10 +82,10 @@ describe('Feed', () => {
 
     it('does not modify existing array', () => {
       const unsortedArticles = [
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
-        anArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 3) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 4) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS) }),
+        aUniqueArticle({ date: new Date(Date.now() - ONE_YEAR_MILLIS * 2) }),
       ]
 
       const unsortedArticlesCopy = [...unsortedArticles]
