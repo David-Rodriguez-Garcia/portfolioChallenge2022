@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { Article } from './src/ui/Article'
+import { Detail } from './src/ui/Detail'
 import { Feed } from './src/ui/Feed'
 import { ScreensParamsList } from './src/ui/NavigationTypes'
 
@@ -12,7 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={'Feed'} component={Feed} />
-        <Stack.Screen name={'Article'} component={Article} />
+        <Stack.Screen name={'Detail'} component={Detail} />
       </Stack.Navigator>
     </NavigationContainer>
   )

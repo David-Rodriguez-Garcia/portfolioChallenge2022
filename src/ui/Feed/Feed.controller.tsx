@@ -5,7 +5,7 @@ import { Feed } from './Feed'
 const FakeData = sortArticles(aSetOfArticles(30))
 
 export const FeedController = ({ navigation }: FeedProps) => {
-  const getArticle = () => navigation.navigate('Article')
+  const getArticleDetail = () => navigation.navigate('Detail')
 
-  return <Feed articles={FakeData} onArticlePress={getArticle} />
+  return <Feed articles={FakeData} onArticlePress={getArticleDetail} />
 }
