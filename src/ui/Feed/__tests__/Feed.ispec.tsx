@@ -11,7 +11,7 @@ describe('Feed', () => {
     const title2 = 'Title 2 text'
     const articles = [anArticle({ title: title1 }), anArticle({ title: title2 })]
 
-    const { getByText } = renderScreen({ articles })
+    const { getByText } = renderFeed({ articles })
 
     expect(getByText(title1)).toBeDefined()
     expect(getByText(title2)).toBeDefined()
@@ -25,7 +25,7 @@ describe('Feed', () => {
       anArticle({ description: description2 }),
     ]
 
-    const { getByText } = renderScreen({ articles })
+    const { getByText } = renderFeed({ articles })
 
     expect(getByText(description1)).toBeDefined()
     expect(getByText(description2)).toBeDefined()
@@ -37,14 +37,14 @@ describe('Feed', () => {
 
     const articles = [anArticle({ date: date1 }), anArticle({ date: date2 })]
 
-    const { getByText } = renderScreen({ articles })
+    const { getByText } = renderFeed({ articles })
 
     expect(getByText(date1.toLocaleDateString())).toBeDefined()
     expect(getByText(date2.toLocaleDateString())).toBeDefined()
   })
 
   it('displays the mini article image', () => {
-    const { getAllByTestId } = renderScreen()
+    const { getAllByTestId } = renderFeed()
 
     expect(getAllByTestId('smallArticleImage')).toBeDefined()
   })
@@ -54,7 +54,7 @@ describe('Feed', () => {
     const title = 'title1'
     const articles = [anArticle({ title })]
 
-    const { getByText } = renderScreen({ articles, onArticlePress })
+    const { getByText } = renderFeed({ articles, onArticlePress })
 
     const button = getByText(title)
 
@@ -64,7 +64,7 @@ describe('Feed', () => {
   })
 })
 
-const renderScreen = (props?: { articles?: Article[]; onArticlePress?: () => void }) => {
+const renderFeed = (props?: { articles?: Article[]; onArticlePress?: () => void }) => {
   const articles = props?.articles ?? aSetOfArticles()
   const onArticlePress = props?.onArticlePress ?? (() => null)
 
