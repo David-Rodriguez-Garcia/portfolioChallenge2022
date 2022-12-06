@@ -1,10 +1,11 @@
 import { View, FlatList, StyleSheet, StatusBar } from 'react-native'
 
 import { Article } from '../../core/domain/model/Feed/Feed'
+import { DetailRouteParams } from '../_navigation/NavigationTypes'
 import { Separator } from './_components/atoms/Separator'
 import { ArticleEntry } from './_components/organisms/ArticleEntry'
 
-type Props = { articles: Article[]; onArticlePress: () => void }
+type Props = { articles: Article[]; onArticlePress: (params: DetailRouteParams) => void }
 
 export const Feed = ({ articles, onArticlePress }: Props) => (
   <View style={styles.feedWrapper}>
@@ -18,7 +19,7 @@ export const Feed = ({ articles, onArticlePress }: Props) => (
           description={item.description}
           image={item.img}
           date={item.date}
-          onPress={onArticlePress}
+          onPress={() => onArticlePress({ title: item.title })}
         />
       )}
     />

@@ -1,3 +1,11 @@
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 
-export const Detail = () => <View></View>
+type Props = {
+  title: string
+}
+
+export const Detail = ({ title }: Props) => (
+  <View testID="detailScreen">
+    <Text>{title}</Text>
+  </View>
+)

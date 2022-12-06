@@ -1,11 +1,13 @@
-import { aSetOfArticles, sortArticles } from '../../core/domain/model/Feed/Feed.model'
-import { FeedProps } from '../_navigation/NavigationTypes'
+import { container } from '../../core/_di'
+import { Article } from '../../core/domain/model/Feed/Feed'
+import { sortArticles } from '../../core/domain/model/Feed/Feed.model'
+import { FeedProps, DetailRouteParams } from '../_navigation/NavigationTypes'
 import { Feed } from './Feed'
 
-const FakeData = sortArticles(aSetOfArticles(30))
-
 export const FeedController = ({ navigation }: FeedProps) => {
-  const getArticleDetail = () => navigation.navigate('Detail')
+  const getArticleDetail = ({ title }: DetailRouteParams) =>
+    navigation.navigate('Detail', { title })
+  const articles = sortArticles(container.resolve<Article[]>('getArticles'))
 
-  return <Feed articles={FakeData} onArticlePress={getArticleDetail} />
+  return <Feed articles={articles} onArticlePress={getArticleDetail} />
 }
