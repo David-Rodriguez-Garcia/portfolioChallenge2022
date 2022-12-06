@@ -1,7 +1,3 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
-export const Detail = () => (
-  <View testID="detailScreen">
-    <Text>This is the detail page</Text>
-  </View>
-)
+export const Detail = () => <View></View>
