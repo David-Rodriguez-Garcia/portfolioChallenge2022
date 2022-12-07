@@ -15,7 +15,7 @@ describe('Feed', () => {
     const title2 = 'Title 2 text'
     const articles = [anArticle({ title: title1 }), anArticle({ title: title2 })]
 
-    const { getByText } = renderView({ articles })
+    const { getByText } = renderView(articles)
 
     expect(getByText(title1)).toBeDefined()
     expect(getByText(title2)).toBeDefined()
@@ -29,7 +29,7 @@ describe('Feed', () => {
       anArticle({ description: description2 }),
     ]
 
-    const { getByText } = renderView({ articles })
+    const { getByText } = renderView(articles)
 
     expect(getByText(description1)).toBeDefined()
     expect(getByText(description2)).toBeDefined()
@@ -41,7 +41,7 @@ describe('Feed', () => {
 
     const articles = [anArticle({ date: date1 }), anArticle({ date: date2 })]
 
-    const { getByText } = renderView({ articles })
+    const { getByText } = renderView(articles)
 
     expect(getByText(date1.toLocaleDateString())).toBeDefined()
     expect(getByText(date2.toLocaleDateString())).toBeDefined()
@@ -54,11 +54,10 @@ describe('Feed', () => {
   })
 
   it('handles press', () => {
-    const onArticlePress = jest.fn()
     const title = 'title1'
     const articles = [anArticle({ title })]
 
-    const { getByText } = renderView({ articles, onArticlePress })
+    const { getByText, onArticlePress } = renderView(articles)
 
     const button = getByText(title)
 
@@ -69,13 +68,12 @@ describe('Feed', () => {
 
   describe('onArticlePress', () => {
     it('calls with the title and description param', () => {
-      const onArticlePress = jest.fn()
       const title = 'title1'
       const description =
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aspernatur minima omnis dignissimos rem, eaque, delectus, repudiandae debitis quas quae ratione recusandae amet iure voluptatibus natus eveniet tenetur a aperiam.'
       const articles = [anArticle({ title, description })]
 
-      const { getByText } = renderView({ articles, onArticlePress })
+      const { getByText, onArticlePress } = renderView(articles)
 
       const button = getByText(title)
 
@@ -102,11 +100,10 @@ describe('FeedController', () => {
   })
 })
 
-const renderView = (props?: { articles?: Article[]; onArticlePress?: () => void }) => {
-  const articles = props?.articles ?? aSetOfArticles()
-  const onArticlePress = props?.onArticlePress ?? (() => null)
+const renderView = (articles: Article[] = aSetOfArticles()) => {
+  const onArticlePress = jest.fn()
 
-  return render(<Feed articles={articles} onArticlePress={onArticlePress} />)
+  return { ...render(<Feed articles={articles} onArticlePress={onArticlePress} />), onArticlePress }
 }
 
 const renderController = () => {
