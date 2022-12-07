@@ -5,7 +5,7 @@ import { container } from '../../../core/_di'
 import { Article } from '../../../core/domain/model/Feed/Feed'
 import { anArticle, aSetOfArticles } from '../../../core/domain/model/Feed/Feed.model'
 import { getArbitraryDate } from '../../../core/domain/utils'
-import { FeedProps, NavigationProp, RouteProp } from '../../_navigation/NavigationTypes'
+import { NavigationProp, RouteProp } from '../../_navigation/NavigationTypes'
 import { Feed } from '../Feed'
 import { FeedController } from '../Feed.controller'
 
@@ -68,10 +68,12 @@ describe('Feed', () => {
   })
 
   describe('onArticlePress', () => {
-    it('calls with the title param', () => {
+    it('calls with the title and description param', () => {
       const onArticlePress = jest.fn()
       const title = 'title1'
-      const articles = [anArticle({ title })]
+      const description =
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aspernatur minima omnis dignissimos rem, eaque, delectus, repudiandae debitis quas quae ratione recusandae amet iure voluptatibus natus eveniet tenetur a aperiam.'
+      const articles = [anArticle({ title, description })]
 
       const { getByText } = renderView({ articles, onArticlePress })
 
@@ -79,24 +81,24 @@ describe('Feed', () => {
 
       fireEvent.press(button)
 
-      expect(onArticlePress).toHaveBeenCalledWith({ title })
+      expect(onArticlePress).toHaveBeenCalledWith({ title, description })
     })
   })
 })
 
 describe('FeedController', () => {
-  it('calls the navigation prop with the title param', () => {
-    const navigation = { navigate: jest.fn() }
-    const route = jest.fn()
+  it('calls the navigation prop with the title and description params', () => {
     const title = 'Title text'
-    const articles = [anArticle({ title })]
+    const description =
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aperiam optio commodi reiciendis tenetur. Nihil voluptates, inventore nulla minus eius quis maxime aspernatur distinctio non atque laudantium. Veniam, eaque laboriosam.'
+    const articles = [anArticle({ title, description })]
     container.register({ getArticles: asFunction(() => articles) })
-    const { getByText } = renderController({ navigation, route })
+    const { getByText, navigation } = renderController()
 
     const button = getByText(title)
     fireEvent.press(button)
 
-    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title })
+    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title, description })
   })
 })
 
@@ -107,9 +109,9 @@ const renderView = (props?: { articles?: Article[]; onArticlePress?: () => void 
   return render(<Feed articles={articles} onArticlePress={onArticlePress} />)
 }
 
-const renderController = (props?: Record<keyof FeedProps, any>) => {
-  const navigation = (props?.navigation ?? jest.fn()) as unknown as NavigationProp<'Feed'>
-  const route = (props?.route ?? jest.fn()) as unknown as RouteProp<'Feed'>
+const renderController = () => {
+  const navigation = { navigate: jest.fn() } as unknown as NavigationProp<'Feed'>
+  const route = jest.fn() as unknown as RouteProp<'Feed'>
 
-  return render(<FeedController navigation={navigation} route={route} />)
+  return { ...render(<FeedController navigation={navigation} route={route} />), navigation, route }
 }

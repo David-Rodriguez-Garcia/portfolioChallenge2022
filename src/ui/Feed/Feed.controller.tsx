@@ -5,8 +5,7 @@ import { FeedProps, DetailRouteParams } from '../_navigation/NavigationTypes'
 import { Feed } from './Feed'
 
 export const FeedController = ({ navigation }: FeedProps) => {
-  const getArticleDetail = ({ title }: DetailRouteParams) =>
-    navigation.navigate('Detail', { title })
+  const getArticleDetail = (params: DetailRouteParams) => navigation.navigate('Detail', params)
   const articles = sortArticles(container.resolve<Article[]>('getArticles'))
 
   return <Feed articles={articles} onArticlePress={getArticleDetail} />
