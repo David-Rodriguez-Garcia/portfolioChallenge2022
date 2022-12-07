@@ -7,7 +7,7 @@ const lorem =
 const articleTemplate: Article = {
   id: 'id_1',
   date: new Date(),
-  img: 'path/to/image',
+  image: 'path/to/image',
   title: 'Fake article title',
   description: lorem,
   url: 'https://www.fakeUrl.com/fakeArticle',

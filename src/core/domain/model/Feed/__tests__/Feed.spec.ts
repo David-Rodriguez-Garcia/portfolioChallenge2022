@@ -5,7 +5,7 @@ describe('Feed', () => {
   describe('anArticle builder', () => {
     it('returns an article', () => {
       const received = anArticle()
-      const requiredProps = ['id', 'date', 'img', 'title', 'description', 'url']
+      const requiredProps = ['id', 'date', 'image', 'title', 'description', 'url']
 
       requiredProps.forEach((prop) => {
         expect(received).toHaveProperty(prop)
@@ -31,7 +31,7 @@ describe('Feed', () => {
       const customArticle = {
         id: 'myId',
         date: new Date('06/03/2020'),
-        img: 'path/to/image',
+        image: 'path/to/image',
         title: 'Custom Title',
         description: 'Lorem ipsum Donor',
         url: 'https://google.com',
@@ -45,7 +45,7 @@ describe('Feed', () => {
   describe('aSetOfArticles builder', () => {
     it('returns elements of type article', () => {
       const received = aSetOfArticles()
-      const requiredProps = ['id', 'date', 'img', 'title', 'description', 'url']
+      const requiredProps = ['id', 'date', 'image', 'title', 'description', 'url']
 
       requiredProps.forEach((prop) => {
         expect(received[1]).toHaveProperty(prop)

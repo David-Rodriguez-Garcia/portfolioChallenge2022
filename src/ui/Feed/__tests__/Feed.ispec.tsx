@@ -67,11 +67,12 @@ describe('Feed', () => {
   })
 
   describe('onArticlePress', () => {
-    it('calls with the title and description param', () => {
+    it('is called with the title, description and image params', () => {
       const title = 'title1'
       const description =
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aspernatur minima omnis dignissimos rem, eaque, delectus, repudiandae debitis quas quae ratione recusandae amet iure voluptatibus natus eveniet tenetur a aperiam.'
-      const articles = [anArticle({ title, description })]
+      const image = 'path/to/image'
+      const articles = [anArticle({ title, description, image })]
 
       const { getByText, onArticlePress } = renderView(articles)
 
@@ -79,24 +80,25 @@ describe('Feed', () => {
 
       fireEvent.press(button)
 
-      expect(onArticlePress).toHaveBeenCalledWith({ title, description })
+      expect(onArticlePress).toHaveBeenCalledWith({ title, description, image })
     })
   })
 })
 
 describe('FeedController', () => {
-  it('calls the navigation prop with the title and description params', () => {
+  it('calls the navigation prop with the title, description and image params', () => {
     const title = 'Title text'
     const description =
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aperiam optio commodi reiciendis tenetur. Nihil voluptates, inventore nulla minus eius quis maxime aspernatur distinctio non atque laudantium. Veniam, eaque laboriosam.'
-    const articles = [anArticle({ title, description })]
+    const image = 'path/to/image'
+    const articles = [anArticle({ title, description, image })]
     container.register({ getArticles: asFunction(() => articles) })
     const { getByText, navigation } = renderController()
 
     const button = getByText(title)
     fireEvent.press(button)
 
-    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title, description })
+    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title, description, image })
   })
 })
 
