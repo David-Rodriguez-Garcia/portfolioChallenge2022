@@ -2,7 +2,7 @@ import { DetailProps } from '../_navigation/NavigationTypes'
 import { Detail } from './Detail'
 
 export const DetailController = ({ route }: DetailProps) => {
-  const { title, description } = route.params
+  const { title, description, image } = route.params
 
-  return <Detail title={title} description={description} />
+  return <Detail title={title} description={description} image={image} />
 }

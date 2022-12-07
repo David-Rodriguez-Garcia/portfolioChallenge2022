@@ -18,9 +18,19 @@ describe('Detail', () => {
 
     expect(getByText(description)).toBeDefined()
   })
+
+  it('displays image', () => {
+    const imageUri = 'path/to/image/'
+    const { getByTestId } = render({ image: imageUri })
+
+    const image = getByTestId('articleImage')
+    const renderedUri = image._fiber.stateNode.props.source.uri
+
+    expect(renderedUri).toContain(imageUri)
+  })
 })
 
-const render = (params: { title?: string; description?: string }) => {
+const render = (params: { title?: string; description?: string; image?: string }) => {
   const detailProps = {
     navigation: () => null,
     route: { params },
