@@ -6,6 +6,7 @@ import type {
 
 export type DetailRouteParams = {
   title: string
+  description: string
 }
 
 export type ScreensParamsList = {
