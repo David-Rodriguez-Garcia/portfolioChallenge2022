@@ -1,7 +1,7 @@
 import { ONE_YEAR_MILLIS } from '../../../utils'
-import { anArticle, aSetOfArticles, sortArticles } from '../Feed.model'
+import { anArticle, aSetOfArticles, sortArticles } from '../Article.model'
 
-describe('Feed', () => {
+describe('Article', () => {
   describe('anArticle builder', () => {
     it('returns an article', () => {
       const received = anArticle()

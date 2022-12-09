@@ -1,7 +1,7 @@
 import { createContainer, asFunction } from 'awilix'
 
-import { Article } from '../domain/model/Feed/Feed'
-import { aSetOfArticles } from '../domain/model/Feed/Feed.model'
+import { Article } from '../domain/model/Article/Article'
+import { aSetOfArticles } from '../domain/model/Article/Article.model'
 
 type containerProps = {
   getArticles: Article[]

@@ -1,6 +1,6 @@
 import { View, FlatList, StyleSheet, StatusBar } from 'react-native'
 
-import { Article } from '../../core/domain/model/Feed/Feed'
+import { Article } from '../../core/domain/model/Article/Article'
 import { DetailRouteParams } from '../_navigation/NavigationTypes'
 import { Separator } from './_components/atoms/Separator'
 import { ArticleEntry } from './_components/organisms/ArticleEntry'

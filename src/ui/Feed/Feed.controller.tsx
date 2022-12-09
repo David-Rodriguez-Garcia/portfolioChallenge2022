@@ -1,6 +1,6 @@
 import { container } from '../../core/_di'
-import { Article } from '../../core/domain/model/Feed/Feed'
-import { sortArticles } from '../../core/domain/model/Feed/Feed.model'
+import { Article } from '../../core/domain/model/Article/Article'
+import { sortArticles } from '../../core/domain/model/Article/Article.model'
 import { FeedProps, DetailRouteParams } from '../_navigation/NavigationTypes'
 import { Feed } from './Feed'
 
