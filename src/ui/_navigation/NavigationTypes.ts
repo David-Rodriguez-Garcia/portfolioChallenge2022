@@ -8,6 +8,7 @@ export type DetailRouteParams = {
   title: string
   description: string
   image: string
+  url: string
 }
 
 export type ScreensParamsList = {

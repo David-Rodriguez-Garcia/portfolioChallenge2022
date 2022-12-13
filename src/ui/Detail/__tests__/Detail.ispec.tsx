@@ -1,7 +1,8 @@
-import { render as baseRender } from '@testing-library/react-native'
+import { fireEvent, render as baseRender } from '@testing-library/react-native'
 
 import { Detail } from '..'
-import { DetailProps } from '../../_navigation/NavigationTypes'
+import * as Network from '../../../core/infrastructure/Network'
+import { DetailProps, DetailRouteParams } from '../../_navigation/NavigationTypes'
 
 describe('Detail', () => {
   it('displays title', () => {
@@ -28,12 +29,25 @@ describe('Detail', () => {
 
     expect(renderedUri).toContain(imageUri)
   })
+
+  it('opens url onPress', () => {
+    const url = 'https://google.com'
+    jest.spyOn(Network, 'openURL')
+
+    const { getByTestId } = render({ url })
+
+    const button = getByTestId('getArticleButton')
+
+    fireEvent.press(button)
+
+    expect(Network.openURL).toHaveBeenCalledWith(url)
+  })
 })
 
-const render = (params: { title?: string; description?: string; image?: string }) => {
-  const detailProps = {
+const render = (params: Partial<DetailRouteParams>) => {
+  const props = {
     navigation: () => null,
     route: { params },
   } as unknown as DetailProps
-  return baseRender(<Detail {...detailProps} />)
+  return baseRender(<Detail {...props} />)
 }
