@@ -67,12 +67,13 @@ describe('Feed', () => {
   })
 
   describe('onArticlePress', () => {
-    it('is called with the title, description and image params', () => {
+    it('is called with the title, description, image and URL params', () => {
       const title = 'title1'
       const description =
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aspernatur minima omnis dignissimos rem, eaque, delectus, repudiandae debitis quas quae ratione recusandae amet iure voluptatibus natus eveniet tenetur a aperiam.'
       const image = 'path/to/image'
-      const articles = [anArticle({ title, description, image })]
+      const url = 'https://google.com/'
+      const articles = [anArticle({ title, description, image, url })]
 
       const { getByText, onArticlePress } = renderView(articles)
 
@@ -80,25 +81,26 @@ describe('Feed', () => {
 
       fireEvent.press(button)
 
-      expect(onArticlePress).toHaveBeenCalledWith({ title, description, image })
+      expect(onArticlePress).toHaveBeenCalledWith({ title, description, image, url })
     })
   })
 })
 
 describe('FeedController', () => {
-  it('calls the navigation prop with the title, description and image params', () => {
+  it('calls the navigation prop with the title, description, image and url params', () => {
     const title = 'Title text'
     const description =
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aperiam optio commodi reiciendis tenetur. Nihil voluptates, inventore nulla minus eius quis maxime aspernatur distinctio non atque laudantium. Veniam, eaque laboriosam.'
     const image = 'path/to/image'
-    const articles = [anArticle({ title, description, image })]
+    const url = 'https://google.com/'
+    const articles = [anArticle({ title, description, image, url })]
     container.register({ getArticles: asFunction(() => articles) })
     const { getByText, navigation } = renderController()
 
     const button = getByText(title)
     fireEvent.press(button)
 
-    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title, description, image })
+    expect(navigation.navigate).toHaveBeenCalledWith('Detail', { title, description, image, url })
   })
 })
 

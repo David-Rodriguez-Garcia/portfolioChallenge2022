@@ -12,14 +12,14 @@ export const Feed = ({ articles, onArticlePress }: Props) => (
     <FlatList
       data={articles}
       ItemSeparatorComponent={() => <Separator />}
-      renderItem={({ item: { id, title, description, image, date } }) => (
+      renderItem={({ item: { id, title, description, image, date, url } }) => (
         <ArticleEntry
           key={id}
           title={title}
           description={description}
           image={image}
           date={date}
-          onPress={() => onArticlePress({ title, description, image })}
+          onPress={() => onArticlePress({ title, description, image, url })}
         />
       )}
     />
