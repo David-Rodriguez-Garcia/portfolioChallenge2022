@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
-import { Text } from 'react-native'
+
+import { Text } from '../../../_components/atoms/Text'
 
 type Props = {
   children: ReactNode

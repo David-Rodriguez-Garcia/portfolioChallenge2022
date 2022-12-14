@@ -1,6 +1,7 @@
-import { Text, Image, Button } from 'react-native'
+import { Image, Button } from 'react-native'
 
 import { Box } from '../_components/_objects/Box'
+import { Text } from '../_components/atoms/Text'
 
 type Props = {
   title: string
@@ -11,9 +12,15 @@ type Props = {
 
 export const Detail = ({ title, description, image, onPress }: Props) => (
   <Box vertical="spaceAround" testID="detailScreen">
-    <Image testID="articleImage" style={{ height: 50, width: 50 }} source={{ uri: image }} />
-    <Text>{title}</Text>
-    <Text>{description}</Text>
-    <Button testID="getArticleButton" title="Open in web" onPress={onPress} />
+    <Image
+      style={{ height: 100, width: 100, alignSelf: 'center' }}
+      source={{ uri: image }}
+      testID="articleImage"
+    />
+    <Text bold="strong" size="big" center>
+      {title}
+    </Text>
+    <Text center>{description}</Text>
+    <Button title="Open in web" onPress={onPress} testID="getArticleButton" />
   </Box>
 )

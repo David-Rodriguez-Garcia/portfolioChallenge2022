@@ -1,6 +1,5 @@
-import { Text } from 'react-native'
-
 import { Row } from '../../../_components/_objects/Row'
+import { Text } from '../../../_components/atoms/Text'
 
 type Props = {
   title: string
@@ -9,7 +8,7 @@ type Props = {
 
 export const ArticleHeader = ({ title, date }: Props) => (
   <Row vertical="spaceBetween">
-    <Text>{title}</Text>
-    <Text>{date.toLocaleDateString()}</Text>
+    <Text bold="strong">{title}</Text>
+    <Text bold="strong">{date.toLocaleDateString()}</Text>
   </Row>
 )
