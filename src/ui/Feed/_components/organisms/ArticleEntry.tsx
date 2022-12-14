@@ -1,7 +1,7 @@
 import { TouchableHighlight } from 'react-native'
 
-import { Box } from '../../_objects/Box'
-import { Row } from '../../_objects/Row'
+import { Box } from '../../../_components/_objects/Box'
+import { Row } from '../../../_components/_objects/Row'
 import { SmallArticleImage } from '../atoms/SmallArticleImage'
 import { SmallDescription } from '../atoms/SmallDescription'
 import { ArticleHeader } from '../molecules/ArticleHeader'
