@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react-native'
 
 import AppNavigator from '../AppNavigator'
+
 jest.useFakeTimers()
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
