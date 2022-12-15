@@ -1,5 +1,11 @@
-import { Feed } from './src/ui/Feed'
+import { NavigationContainer } from '@react-navigation/native'
+
+import AppNavigator from './src/ui/_navigation/AppNavigator'
 
 export default function App() {
-  return <Feed />
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  )
 }

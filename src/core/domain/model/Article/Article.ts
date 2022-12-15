@@ -1,7 +1,7 @@
 export type Article = {
   id: string
   date: Date
-  img: string
+  image: string
   title: string
   description: string
   url: string
