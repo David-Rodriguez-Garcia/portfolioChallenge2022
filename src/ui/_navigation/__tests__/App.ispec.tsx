@@ -11,7 +11,7 @@ jest.useFakeTimers()
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
 container.register({
-  getArticles: asFunction(() => aSetOfArticles()),
+  getArticles: asFunction(() => Promise.resolve(aSetOfArticles())),
 })
 
 describe('App', () => {

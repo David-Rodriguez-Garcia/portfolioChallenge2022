@@ -94,7 +94,7 @@ describe('FeedController', () => {
     const image = 'path/to/image'
     const url = 'https://google.com/'
     const articles = [anArticle({ title, description, image, url })]
-    container.register({ getArticles: asFunction(() => articles) })
+    container.register({ getArticles: asFunction(() => Promise.resolve(articles)) })
     const { getByText, navigation } = renderController()
 
     const button = getByText(title)
